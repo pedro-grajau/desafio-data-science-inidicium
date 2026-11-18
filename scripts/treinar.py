@@ -51,7 +51,7 @@ def main():
               f"R2={r2_score(notas, previsto):.4f}")
     pipeline = make_pipeline(FunctionTransformer(preparar), clone(modelos[vencedor]))
     pipeline.fit(dados.loc[x.index], y)
-    destino = Path(__file__).with_name("modelo_imdb.pkl")
+    destino = (Path(__file__).resolve().parents[1] / "modelos" / "modelo_imdb.pkl")
     pacote = pickle.dumps(pipeline, protocol=5)
     recarregado = pickle.loads(pacote)
     np.testing.assert_allclose(recarregado.predict(dados.loc[teste.index]), previsto, rtol=0, atol=0)

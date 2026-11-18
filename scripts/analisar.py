@@ -115,5 +115,5 @@ if __name__ == "__main__":
     d["receita"] = pd.to_numeric(d.Gross.str.replace(",", ""))
     d["minutos"] = pd.to_numeric(d.Runtime.str.extract(r"(\d+)")[0])
     tabelas = descrever(d) + faturamento(d) + sinopses(d)
-    Path(__file__).with_name("evidencias.md").write_text(
+    (Path(__file__).resolve().parents[1] / "relatorios" / "evidencias.md").write_text(
         "# Tabelas das análises\n\n" + "\n".join(tabelas), encoding="utf-8")
